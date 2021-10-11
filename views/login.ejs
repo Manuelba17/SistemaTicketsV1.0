@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="resource/css/style.css">
+    <link rel="stylesheet" href="resource/font-awesome/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+    <div class="login-form" style="color:#ffffff">
+        <h2>Inicio de sesion</h2> 
+        
+        <form action="/auth" method="POST">
+            
+                <i class="fa fa-users fa-fw fa-2x"></i>
+                <b>  User </b>
+
+                <div>
+                    <input type="text" name="user" id="user"  required>             
+                </div>
+                
+                    <i class="fa fa-lock fa-3x "></i>    
+                    <b>  Password </b>           
+            <div>
+                <input type="password" name="pass" id="pass" required>
+    
+            </div>               
+                    <input type="submit" value="Sign in" class="btn-login">  
+                    <a href="register" class="btn-register"> Sign up</a>
+        </form>
+       
+    </div>
+    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <% if (typeof alert != "undefined") { %>
+       <script>
+          Swal.fire({
+             icon: '<%= alertIcon %>',
+            title: '<%= alertTitle%>',
+             text: '<%= alertMessage%>',
+             timer: <%= timer%>,
+            showConfirmButton: <%= showConfirmButton%>, 
+            }).then(()=>{
+                window.location= '/<%= ruta%>'
+            })
+       </script>
+      <% } %>
+     
+
+</body>
+</html>

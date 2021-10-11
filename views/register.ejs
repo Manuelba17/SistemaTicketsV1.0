@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="resource/css/style.css">
+    <link rel="stylesheet" href="resource/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+
+    <div class="register-form" style="color:#ffffff">
+        <h2> Registrate gratis</h2>
+
+        <form action="/register" method="POST">
+           <b> <label for="user" >User</label></b>
+           <div>
+                <input type="text" name="user" id="user"  required>
+           </div>
+           <b> <label for="pass">New Password</label></b>
+            <div>
+                <input type="password" name="pass" id="pass" required>
+            </div>
+            <b> <label for="name">Full Name</label></b>
+           <div>
+                <input type="text" name="name" id="name" required>
+           </div>
+
+           <b> <label for="company">Company</label></b>
+                <div>
+                    <select name="company" id="company" class="select-css">
+                    <option value="company1" >Company one</option>
+                    <option value="company2" >Company two</option>
+                    </select>
+                </div>
+        <div style="display: inline;">
+            <a href="/login" class="btn-atras"><i class="fa fa-arrow-left fa-2x"></i></a> 
+            <input type="reset" value="Reset" class="btn-cancel"> <input type="submit" value="Save" class="btn-save">
+             
+
+            
+
+        </div>
+        </form>
+
+
+    </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <% if (typeof alert != "undefined") { %>
+       <script>
+          Swal.fire({
+             icon: '<%= alertIcon %>',
+            title: '<%= alertTitle%>',
+             text: '<%= alertMessage%>',
+             timer: <%= timer%>,
+            showConfirmButton: <%= showConfirmButton%>, 
+            }).then(()=>{
+                window.location= '/<%= ruta%>'
+            })
+       </script>
+      <% } %>
+</body>
+</html>

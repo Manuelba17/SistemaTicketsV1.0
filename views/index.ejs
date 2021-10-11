@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="resource/css/style.css">
+</head>
+<body>
+    <div class="">
+        <h2>Sistema de gestion de tickets</h2>
+        <% if(login){ %>
+            <p> <strong> Bienvenido usuario:</strong> <%= name%></p>
+            <a href="logout" class="a-logout">Logout</a>
+            <a href="ticket" class="btn-login">Crear ticket</a>
+        <% }else{ %>
+            <p><strong><%= name%></strong></p>
+            <a href="login" class="btn-inicio">Ir al LOGIN</a>
+        <%} %>
+        
+    </div>
+</body>
+</html>
