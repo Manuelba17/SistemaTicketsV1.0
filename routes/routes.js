@@ -15,20 +15,21 @@ router.post('/register', customerController.dbregister);
     //11-- Autenticacion
 router.post('/auth', customerController.auth);
 
-// 12-- autenticacion para el resto de las paginas
-router.get('/', customerController.seguridad);
-
 // 13 -- Logout
 router.get('/logout', customerController.logout);
 
-// pagina de ticket
-router.get('/ticket', customerController.ticket);
+// pagina de crear ticket
+router.get('/create', customerController.create);
+router.post('/tick', customerController.save);
+router.get('/edit/:TiId', customerController.edit);
+router.post('/actualizar',customerController.update);
+router.get('/delete/:TiId', customerController.delete);
 
-// post de crar ticket
-router.post('/tick', customerController.dbticket);
 
-// get para borrar
-router.get('/tickets/:TiId', customerController.delete);
+// 12-- pagina de raiz
+router.get('/', customerController.raiz);
+
+
 
 
 

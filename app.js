@@ -40,14 +40,6 @@ const customerRoute = require('./routes/routes');
 // Mis rutas
 
 app.use('/', customerRoute);
-app.use('login', customerRoute);
-app.use('register', customerRoute);
-app.use('auth', customerRoute);
-app.use('registers', customerRoute);
-app.use('logout', customerRoute);
-
-
-
 
 
 app.listen(3000, (req, res) => {

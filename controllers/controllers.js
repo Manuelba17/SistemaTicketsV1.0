@@ -96,90 +96,142 @@ controller.auth = async(req,res) =>{
     }
 }
 
-// Autenticacion para el resto de las paginas
-controller.seguridad = (req,res) =>{
+// pagina de dashboard
+controller.raiz = (req,res) =>{
+    connection.query('SELECT * FROM tickets', async(error,results)=>{
+
     if(req.session.loggedin){
             res.render('index',{
                 login:true,
-                name: req.session.name        
+                name: req.session.name,
+                results:results
             });
        }else{
            res.render('index',{
                login:false,
-               name: 'Debe iniciar sesion'
+               name: 'Usuario NO Realizo el login, por favor inicie sesion'
            })
        }
+    })
 }
 
 // Logout
 controller.logout = (req,res)=>{
     req.session.destroy(()=>{
-        res.redirect('/')
+        res.redirect('login')
     })
 }
-// pagina de crear ticket y listar los tickets
-controller.ticket = async(req,res) =>{
-        
-    connection.query('SELECT * FROM tickets', async(error,results)=>{
+
+
+// pagina de crear el ticket 
+controller.create = async(req,res) =>{
 
     if(req.session.loggedin){
-            res.render('ticket',{
-                login:true,
-                name: req.session.name,
-                data: results
-            })}else{
-           res.render('index',{
-               login:false,
-               name: 'Debe iniciar sesion'
-           })
-       }
-})
+        res.render('create',{
+            login:true,
+            name: req.session.name,
+             
+        });
+   }else{
+       res.render('index',{
+           login:false,
+           name: 'Usuario NO Realizo el login, por favor inicie sesion'
+       })
+   }
 }
 
-// registro en la base de datos del ticket
-controller.dbticket = async(req, res)=>{
+// POST para guardar la informacion
+controller.save = (req, res) =>{
     const data = req.body
-
     connection.query('INSERT INTO tickets SET ?', [data], async(error,results)=>{
+        if(req.session.loggedin){          
+            res.render('create', {
+                login:true,
+                name:req.session.name,
+                alert:true,
+                alertTitle:"Felicitaciones",
+                alertMessage:"El ticket se a creado",
+                alertIcon:'success',
+                ruta:'',   
+                showConfirmButton: false,
+                timer:  1500
+                 })
+        }else{
+            res.render('index',{
+                login:false,
+                name: 'Debe iniciar sesion'
+            })
+        }
+   })
+}
+
+//Pagina para editar
+controller.edit = (req, res) =>{
+    const id = req.params.TiId
+
+    connection.query('SELECT * FROM tickets WHERE TiId=?', [id], (error, results)=> {
+        if(req.session.loggedin){
+            res.render('edit',{
+                login:true,
+                name:req.session.name,
+                user:results[0]
+            });
+        }else {
+            res.render('edit',{
+                login:false,
+                name: 'Usuario NO Realizo el login, por favor inicie sesion'
+            })
+               
+        }
+    })
+}
+
+// POST para editar los datos nuevos enviados
+controller.update = (req, res) =>{
+    const tipo = req.body.TiTipo
+    const asunto = req.body.TiAsunto
+    const estado = req.body.TiEstado
+    const observ = req.body.TiObservaciones
+    const id = req.body.TiId
+    connection.query('UPDATE tickets SET ? WHERE TiId = ?', [{TiObeservaciones:observ, TiEstado:estado}, id], async(error,results)=>{
         if(error){
             console.log(error);
         }else{
-            req.session.loggedin =true;
-            res.render('login', {
-            alert:true,
-            alertTitle:"Felicitaciones",
-            alertMessage:"El ticket se a creado",
-            alertIcon:'success',
-            ruta:'ticket',   
-            showConfirmButton: false,
-            timer:  1500
-             })
+            res.redirect('/')
         }
-        
-    })
+   })
 }
 
-// funcion de borrado en la tabla tickets
-controller.delete = async(req,res) =>{   
-   const {TiId} = req.params;
-   console.log(TiId);
-   
-    connection.query('DELETE FROM tickets WHERE TiId = ?', [TiId], (error, rows)=>{
+// Get para eliminar los archivos
+controller.delete = (req, res) =>{
+    const id = req.params.TiId;
+    console.log(id);
+    if(req.session.loggedin){
+        connection.query('DELETE FROM tickets where TiId = ?', [id], (error, results) =>{
 
-        if(req.session.loggedin){
+            if(req.session.loggedin){
+                res.redirect('/')
+            }
+    
+   else{
+            res.render('index',{
+                login:false,
+                name: 'Usuario NO Realizo el login, por favor inicie sesion'
+            })
+        }
+    })
+}else{
+    res.render('index',{
+        login:false,
+        name: 'Usuario NO Realizo el login, por favor inicie sesion'
+    })
+}
+}
+
+
            
-            res.redirect('/')
-       }else{
-           res.render('index',{
-               login:false,
-               name: 'Debe iniciar sesion'
-           })
-       }
-
-
-    } )
-
-    }
+           
+      
 
 
 module.exports = controller;

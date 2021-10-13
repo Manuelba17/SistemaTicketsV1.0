@@ -1,8 +1,7 @@
 body{
     background:  linear-gradient(to right, #A74CF2, #617BFB); 
-    text-align: center;
-    margin: auto;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin:0 auto;
+  
 
 }
 
@@ -20,6 +19,15 @@ body{
     margin-bottom: 20px;
 }
 
+.login{
+    
+    margin:0 auto;
+    padding: 0px 20px 60px 20px;
+    text-align: center !important;   
+    box-shadow: 0px 19px 38px 10px rgba(0, 0, 0, 0.3), 30px 30px 12px  rgba(0, 0, 0, 0.22);
+    margin-bottom: 5px;
+}
+
 .register-form, .contenedor{
     width: 400px;
     margin:0 auto;
@@ -29,6 +37,8 @@ body{
     box-shadow: 0px 19px 38px 10px rgba(0, 0, 0, 0.3), 50px 50px 12px  rgba(0, 0, 0, 0.22);
     
 }
+
+
 
 .login-form h2{
     text-align: center;
@@ -259,35 +269,10 @@ body{
 }
 
 
-  table {
-      
-    width: 80%;
-     margin:0 auto;
-      border-collapse: expression("separate", cellSpacing = "5px");
-      border: 1px solid #000;
-      border-collapse: separate;
-      border-spacing: 5px;
- }
- th {
-   width: 25%;
-   text-align: left;
-   vertical-align: top;
-   border: 1px solid #000;
-   border-collapse: collapse;
-   padding: 0.3em;
-   caption-side: bottom;
-   border-radius: 3px;
-}
+
+
 tr:hover{
-    color: white;
-    background-color: #3b1e70;
-    border-color: #3b1e70;
+    color: rgb(0, 0, 0);
+    background-color: #edeaf3;
+    border-color: #000000;
 }
-caption {
-   padding: 0.3em;
-  
-}
-th {
-   background: rgb(51, 171, 226);
-}
- 
